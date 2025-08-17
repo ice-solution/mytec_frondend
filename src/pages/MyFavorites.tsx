@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faHeart, faCalendar, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const MyFavorites = () => {
   const navigate = useNavigate();

@@ -17,17 +17,14 @@ import { useApi } from '../hooks/useApi';
 const Home = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
-  const [searchPage, setSearchPage] = useState(1);
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [searching, setSearching] = useState(false);
-  const [searchError, setSearchError] = useState('');
+
 
   // Upcoming events
   const { data: eventsData, loading: eventsLoading, error: eventsError, execute: fetchEvents } = useApi<any>();
   // Categories
   const { data: categoriesData, loading: categoriesLoading, error: categoriesError, execute: fetchCategories } = useApi<any>();
   // User profile
-  const { data: userData, loading: userLoading, error: userError, execute: fetchUser } = useApi<any>();
+  const { data: userData, loading: userLoading, execute: fetchUser } = useApi<any>();
 
   useEffect(() => {
     fetchEvents(api.get('/events?list=upcoming&page=1&limit=10'));
@@ -142,49 +139,7 @@ const Home = () => {
               </Swiper>
             )}
           </section>
-          {/* 搜尋結果區塊 */}
-          {searching && (
-            <div className="text-center text-gray-400 mt-4">搜尋中...</div>
-          )}
-          {searchError && (
-            <div className="text-center text-red-400 mt-4">{searchError}</div>
-          )}
-          {searchResults.length > 0 && !searching && (
-            <section className="p-4">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-[#133366]">Search Results</h2>
-                {/* 可加分頁按鈕 */}
-              </div>
-              <Swiper
-                spaceBetween={16}
-                slidesPerView={'auto'}
-                modules={[Pagination]}
-                className="my-2"
-              >
-                {searchResults.map((event: any) => (
-                  <SwiperSlide key={event._id || event.id} style={{ width: 260 }}>
-                    <div
-                      className="bg-white rounded-lg shadow-md p-4 cursor-pointer"
-                      onClick={() => navigate('/event-details', { state: { eventId: event._id || event.id } })}
-                    >
-                      <img
-                        src={event.event_img ? `${API_URL}${event.event_img}` : event.img || event.image || 'https://via.placeholder.com/250x150'}
-                        alt="Event"
-                        className="w-full h-32 object-cover rounded-md mb-2"
-                      />
-                      <h3 className="font-semibold text-[#133366] mb-1">{event.title}</h3>
-                      <p className="text-sm text-gray-600 flex items-center mb-1">
-                        <FontAwesomeIcon icon={faCalendar} className="text-xl mr-1" /> <span>{event.date}</span>
-                      </p>
-                      <p className="text-sm text-gray-600 flex items-center">
-                        <FontAwesomeIcon icon={faLocationDot} className="text-xl mr-1" /> <span>{event.location}</span>
-                      </p>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </section>
-          )}
+
           {/* Category List Section */}
           <section className="p-4">
             <div className="flex justify-between items-center mb-4">

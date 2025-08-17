@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faQrcode, faUser, faCog, faArrowLeft, faCheck, faSort, faShareNodes, faArrowRight, faCalendar, faBookmark, faBook, faRightFromBracket, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook, faWhatsapp, faLine, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faPhone, faEnvelope, faQrcode, faCog, faArrowRight, faCalendar, faBookmark, faBook, faRightFromBracket, faHeart } from '@fortawesome/free-solid-svg-icons';
 import api from '../services/api';
 import { useApi } from '../hooks/useApi';
 import axios from 'axios';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { data: userData, loading, error, execute } = useApi<any>();
+  const { data: userData, execute } = useApi<any>();
   useEffect(() => {
     execute(api.get('/users/profile'));
   }, []);

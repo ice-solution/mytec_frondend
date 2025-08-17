@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ const Search = () => {
   const location = useLocation();
   // 支援從 location.state 傳入 search 關鍵字
   const initialQ = location.state?.q || '';
-  const [search, setSearch] = useState(initialQ);
+  const [search] = useState(initialQ);
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

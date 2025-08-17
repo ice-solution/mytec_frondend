@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import api from '../services/api';
@@ -6,7 +6,7 @@ import { useApi } from '../hooks/useApi';
 
 const MemberCard = () => {
   const navigate = useNavigate();
-  const { data: userData, loading, error, execute } = useApi<any>();
+  const { data: userData, execute } = useApi<any>();
   useEffect(() => {
     execute(api.get('/users/profile'));
   }, []);

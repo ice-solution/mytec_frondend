@@ -1,7 +1,6 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faCalendar, faChartBar, faUser, faCog, faQrcode, faPlus, faClipboardList } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faCalendar, faChartBar, faUser, faQrcode } from '@fortawesome/free-solid-svg-icons';
 
 const FooterNav = () => {
   const navigate = useNavigate();
