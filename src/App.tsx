@@ -31,24 +31,21 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Splash />} />
+        <Route path="/splash" element={<Splash />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        {/* <Route path="/home" element={<Home />} /> */}
-        <Route path="/event-details" element={<EventDetails />} />
         <Route path="/events/:categories/:slug" element={<EventBySlug />} />
         <Route path="/event-management" element={<EventManagement />} />
         <Route path="/qr-checkin" element={<QrCheckIn />} />
         <Route path="/qr-test" element={<QrTestGenerator />} />
-        <Route path="/guest-list" element={<GuestList />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
         <Route path="/notification" element={<Notification />} />
         <Route path="/notification-details" element={<NotificationDetails />} />
         <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/event-details" element={<EventDetails />} />
           <Route path="/manage" element={<Manage />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/filter" element={<Filter />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/guest-list" element={<GuestList />} />
           <Route path="/member-card" element={<MemberCard />} />

@@ -6,7 +6,7 @@ const FooterNav = () => {
   const navigate = useNavigate();
   return (
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[95%] max-w-md bg-white rounded-full shadow-lg flex justify-around items-center py-2 px-2 z-50">
-      <button className="flex flex-col items-center text-xs text-[#133366]" onClick={() => navigate('/home')}>
+      <button className="flex flex-col items-center text-xs text-[#133366]" onClick={() => navigate('/')}>
         <FontAwesomeIcon icon={faHouse} className="text-2xl" />
         <span>Home</span>
       </button>

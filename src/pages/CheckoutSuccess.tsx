@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import api from '../services/api';
+import stripeService from '../services/stripeService';
 
 const CheckoutSuccess = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const CheckoutSuccess = () => {
 
   const eventId = searchParams.get('event');
   const userId = searchParams.get('user');
+  const sessionId = searchParams.get('session_id');
 
   useEffect(() => {
     const handlePaymentSuccess = async () => {
@@ -23,7 +25,18 @@ const CheckoutSuccess = () => {
       }
 
       try {
-        // Call join event API after successful payment
+        // First verify the payment with Stripe
+        if (sessionId) {
+          const paymentVerification = await stripeService.verifyPayment(sessionId);
+          
+          if (!paymentVerification.success) {
+            setError('Payment verification failed. Please contact support.');
+            setLoading(false);
+            return;
+          }
+        }
+
+        // Call join event API after successful payment verification
         const response = await api.post('/event-guests/join', {
           event: eventId,
           user: userId
@@ -31,6 +44,8 @@ const CheckoutSuccess = () => {
 
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
+          // 清除保存的 checkout session
+          stripeService.clearCheckoutSession();
           // Redirect to event details after a short delay
           setTimeout(() => {
             navigate('/event-details', { 
@@ -42,15 +57,15 @@ const CheckoutSuccess = () => {
           }, 2000);
         }
       } catch (err: any) {
-        console.error('Join event error:', err);
-        setError(err.response?.data?.message || 'Failed to join event after payment');
+        console.error('Payment success handling error:', err);
+        setError(err.response?.data?.message || 'Failed to complete payment process');
       } finally {
         setLoading(false);
       }
     };
 
     handlePaymentSuccess();
-  }, [eventId, userId, navigate]);
+  }, [eventId, userId, sessionId, navigate]);
 
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col items-center justify-center">

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,8 +9,8 @@ html, body, #root {
   margin: 0;
   padding: 0;
   background: #e6eff8;
-  /* 確保 font-family 正確應用，避免瀏覽器預設字體影響外觀 */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  /* 應用 DM Sans 字型 */
+  font-family: "DM Sans", "DM Sans Fallback: Arial", ui-sans-serif, system-ui, sans-serif;
   }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -12,6 +12,7 @@ const Subscribe = () => {
   const [tickets, setTickets] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [hasRedirected, setHasRedirected] = useState(false);
   const API_URL = import.meta.env.VITE_API_URL || '';
 
   useEffect(() => {
@@ -19,21 +20,37 @@ const Subscribe = () => {
       navigate(-1);
       return;
     }
+    
+    // 如果已經跳轉過，不再重複跳轉
+    if (hasRedirected) {
+      return;
+    }
+    
     const fetchTickets = async () => {
       setLoading(true);
       setError('');
       try {
         const res = await api.get(`/event-tickets/event/${eventId}`);
-        setTickets(Array.isArray(res.data) ? res.data : []);
+        const ticketData = Array.isArray(res.data) ? res.data : [];
+        setTickets(ticketData);
+        
+        // 如果沒有 ticket，直接跳轉到 checkout
+        if (ticketData.length === 0) {
+          setHasRedirected(true);
+          navigate('/checkout', { state: { event, ticket: null } });
+        }
       } catch (e) {
         setError('載入失敗');
         setTickets([]);
+        // 即使載入失敗，也嘗試跳轉到 checkout（可能是免費活動）
+        setHasRedirected(true);
+        navigate('/checkout', { state: { event, ticket: null } });
       } finally {
         setLoading(false);
       }
     };
     fetchTickets();
-  }, [eventId, navigate]);
+  }, [eventId, navigate, event, hasRedirected]);
 
   return (
     <div className="min-h-screen bg-[#F0F2F5] flex flex-col">

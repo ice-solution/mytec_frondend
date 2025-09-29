@@ -268,7 +268,7 @@ const EventBySlug = () => {
               </div>
               
               {/* 活動管理按鈕（僅主辦方可見） */}
-              {isOwner && (
+              {isOwner && currentUser && (
                 <div className="flex justify-center mb-4">
                   <button
                     className="bg-orange-500 text-white rounded-full px-6 py-2 font-bold text-base shadow hover:bg-orange-600 transition"

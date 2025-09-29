@@ -32,7 +32,10 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       // 處理未授權錯誤
       localStorage.removeItem('token');
-      window.location.href = '/login';
+      // 只在非主頁時重定向到登入頁面
+      if (window.location.pathname !== '/') {
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }
