@@ -4,12 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faHouse, 
   faCalendar, 
-  faChartBar, 
   faUser, 
-  faQrcode,
-  faHeart,
-  faBell,
-  faSearch
+  faHeart
 } from '@fortawesome/free-solid-svg-icons';
 import api from '../services/api';
 

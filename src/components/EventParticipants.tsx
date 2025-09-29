@@ -21,7 +21,7 @@ interface EventParticipantsProps {
   totalParticipants?: number;
 }
 
-const EventParticipants = ({ eventId, totalParticipants = 0 }: EventParticipantsProps) => {
+const EventParticipants = ({ eventId }: EventParticipantsProps) => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -100,7 +100,7 @@ const EventParticipants = ({ eventId, totalParticipants = 0 }: EventParticipants
             <>
               {/* Avatar List */}
               <div className="flex -space-x-2">
-                {displayParticipants.map((participant, index) => (
+                {displayParticipants.map((participant) => (
                   <div key={participant._id} className="relative">
                     {participant.user.avatar ? (
                       <img

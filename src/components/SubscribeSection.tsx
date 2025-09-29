@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import api from '../services/api';
 
 const SubscribeSection = () => {
@@ -64,8 +62,8 @@ const SubscribeSection = () => {
                 disabled={isLoading}
                 className="text-white px-6 py-3 rounded-r-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 style={{ backgroundColor: 'rgb(19 51 102 / var(--tw-bg-opacity))' }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgb(0 46 93)'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = 'rgb(19 51 102 / var(--tw-bg-opacity))'}
+                onMouseEnter={(e) => (e.target as HTMLButtonElement).style.backgroundColor = 'rgb(0 46 93)'}
+                onMouseLeave={(e) => (e.target as HTMLButtonElement).style.backgroundColor = 'rgb(19 51 102 / var(--tw-bg-opacity))'}
               >
                 {isLoading ? 'Subscribing...' : 'Subscribe'}
               </button>
