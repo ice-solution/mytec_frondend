@@ -5,6 +5,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import api from '../services/api';
 import stripeService from '../services/stripeService';
 import CheckoutWarning from '../components/CheckoutWarning';
+import { handleJoinEventError } from '../utils/errorHandler';
 
 const Checkout = () => {
   const location = useLocation();
@@ -83,8 +84,8 @@ const Checkout = () => {
         });
       }
     } catch (err: any) {
-      console.error('Join event error:', err);
-      setError(err.response?.data?.message || 'Failed to join event');
+      const errorMessage = handleJoinEventError(err);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

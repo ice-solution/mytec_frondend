@@ -333,7 +333,7 @@ const Home = () => {
           <div className="bg-white rounded-2xl w-full max-w-md p-6">
             <div className="text-center">
               <h3 className="text-lg font-bold text-[#133366] mb-4">
-                歡迎使用 Timable
+                歡迎使用 Mytec
               </h3>
               <p className="text-gray-600 mb-6">
                 登入後可以享受更多功能，包括個人化推薦和活動管理。

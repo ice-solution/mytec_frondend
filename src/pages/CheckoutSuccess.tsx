@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import api from '../services/api';
 import stripeService from '../services/stripeService';
+import { handleJoinEventError } from '../utils/errorHandler';
 
 const CheckoutSuccess = () => {
   const navigate = useNavigate();
@@ -58,7 +59,8 @@ const CheckoutSuccess = () => {
         }
       } catch (err: any) {
         console.error('Payment success handling error:', err);
-        setError(err.response?.data?.message || 'Failed to complete payment process');
+        const errorMessage = handleJoinEventError(err);
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
